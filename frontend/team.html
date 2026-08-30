@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Team - ScholarMate AI</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    .team-header {
+      text-align: center;
+      padding: 3rem 1.5rem 2rem 1.5rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+
+    .college-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--brand-primary);
+      margin-bottom: 1rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .team-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--brand-gradient);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 0 auto 1.25rem auto;
+      box-shadow: var(--shadow-md);
+    }
+
+    .team-role {
+      color: var(--brand-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .tech-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/logo.svg" alt="ScholarMate">
+      <span>ScholarMate</span>
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a href="dashboard.html" class="btn btn-primary btn-sm">📊 Open Dashboard</a>
+      <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+        <span id="themeIcon">☀️</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <div class="team-header">
+    <div class="container">
+      <div class="college-badge">
+        🎓 Final Year Major Project (2026-2027)
+      </div>
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">AANM & VVRSR Polytechnic College</h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 750px; margin: 0 auto;">
+        Department of Artificial Intelligence and Machine Learning
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Project Team Cards -->
+    <h2 style="text-align: center; margin-bottom: 2rem;">Project Team Members</h2>
+
+    <div class="team-grid">
+      <!-- Team Member 1 -->
+      <div class="team-card">
+        <div class="team-avatar">P1</div>
+        <h3>Vastav<br/>Project Lead<br/>24030-aim-026</h3>
+        <div class="team-role">full-stack & AI Architect</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Diploma in Artificial Intelligence and Machine Learning Engineering<br>
+          AANM & VVRSR Polytechnic College
+        </p>
+      </div>
+
+      <!-- Team Member 2 -->
+       <div class="team-card">
+        <div class="team-avatar">P3</div>
+        <h3>Vishnu<br/>Frontend Engineer<br/>24030-aim-020</h3>
+        <div class="team-role">UI/UX & Interactive Design</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Diploma in Artificial Intelligence and Machine Learning Engineering<br>
+          AANM & VVRSR Polytechnic College
+        </p>
+      </div>
+     
+
+      <!-- Team Member 3 -->
+       <div class="team-card">
+        <div class="team-avatar">P2</div>
+        <h3>Nihkileswar<br/>Backend Developer<br/>24030-aim-051</h3>
+        <div class="team-role">Database & API Integration</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Diploma in Artificial Intelligence and Machine Learning Engineering<br>
+          AANM & VVRSR Polytechnic College
+        </p>
+      </div>
+
+      <!-- Team Member 4 -->
+      <div class="team-card">
+        <div class="team-avatar">P4</div>
+        <h3>Sathivk<br/>OCR & tester<br/>24030-aim-022</h3>
+        <div class="team-role">Testing & checking master</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Diploma in Artificial Intelligence and Machine Learning Engineering<br>
+          AANM & VVRSR Polytechnic College
+        </p>
+      </div>
+    </div>
+
+    <!-- Tech Stack Architecture Section -->
+    <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 4rem;">
+      <h2>💻 Technical Stack & System Architecture</h2>
+      <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+        ScholarMate is engineered with modern full-stack web technologies and cloud AI APIs:
+      </p>
+
+      <div class="tech-stack-grid">
+        <div class="tech-item"><span>🚀</span> Node.js + Express.js</div>
+        <div class="tech-item"><span>⚡</span> SQLite (`better-sqlite3`)</div>
+        <div class="tech-item"><span>✨</span> Google Gemini 2.5 Flash</div>
+        <div class="tech-item"><span>📄</span> `pdf-parse` (PDF Extraction)</div>
+        <div class="tech-item"><span>🖼️</span> `tesseract.js` (OCR)</div>
+        <div class="tech-item"><span>🔐</span> `jsonwebtoken` + `bcryptjs`</div>
+        <div class="tech-item"><span>📤</span> `multer` (File Uploads)</div>
+        <div class="tech-item"><span>🎨</span> HTML5, CSS3, Vanilla JS</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - ScholarMate AI</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      <img src="assets/logo.svg" alt="ScholarMate">
+      <span>ScholarMate</span>
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a href="team.html" class="btn btn-secondary btn-sm">👥 Team Page</a>
+      <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+        <span id="themeIcon">☀️</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main App Layout -->
+  <div class="dashboard-container">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li>
+          <a class="sidebar-link active" data-section="overview">
+            <span>📊</span> Overview
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-section="upload">
+            <span>📤</span> Upload Textbook
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-section="books">
+            <span>📚</span> My Books
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-section="notes">
+            <span>📝</span> AI Notes
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-section="flashcards">
+            <span>🃏</span> Flashcards
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-section="quiz">
+            <span>📋</span> Interactive Quiz
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile Badge in Sidebar -->
+      <div>
+        <div class="user-profile-badge">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="user-avatar" id="sidebarUserAvatar">U</div>
+            <div style="overflow: hidden;">
+              <div style="font-weight: 700; font-size: 0.9rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="sidebarUserName">Student User</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">ScholarMate Scholar</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-sm" id="logoutBtn" style="width: 100%; margin-top: 0.75rem;">
+          🚪 Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- SECTION 1: OVERVIEW -->
+      <section class="dashboard-section" id="overview">
+        <h2 class="section-title">Dashboard Overview</h2>
+        <p class="section-subtitle">Welcome back! Track your study progress and AI-generated learning materials.</p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div>
+              <div class="stat-value" id="statBooksCount">0</div>
+              <div class="stat-label">Textbooks Uploaded</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div>
+              <div class="stat-value" id="statNotesCount">0</div>
+              <div class="stat-label">AI Notes Created</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🃏</div>
+            <div>
+              <div class="stat-value" id="statFlashcardsCount">0</div>
+              <div class="stat-label">Flashcard Sets</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div>
+              <div class="stat-value" id="statAvgScore">0%</div>
+              <div class="stat-label">Average Quiz Score</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom: 1rem;">Recent Uploads</h3>
+        <div id="recentBooksList" class="books-grid">
+          <div class="skeleton" style="height: 120px;"></div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: UPLOAD -->
+      <section class="dashboard-section" id="upload" style="display: none;">
+        <h2 class="section-title">Upload Textbook or Study Document</h2>
+        <p class="section-subtitle">Upload PDFs or image photos of textbook pages. The AI will extract text and generate study assets.</p>
+
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">☁️</div>
+          <h3>Drag & Drop your file here</h3>
+          <p style="color: var(--text-muted); margin: 0.5rem 0 1.5rem 0;">Supports PDF, PNG, JPG, JPEG files (Up to 25MB)</p>
+          <button class="btn btn-primary">📁 Choose File</button>
+          <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.webp,.txt" style="display: none;">
+        </div>
+
+        <div id="uploadProgress" style="display: none; margin-top: 2rem;" class="notes-container">
+          <h4 id="uploadStatusText">Extracting text...</h4>
+          <div class="quiz-progress-bar" style="margin-top: 1rem;">
+            <div class="quiz-progress-fill" id="progressBarFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: MY BOOKS -->
+      <section class="dashboard-section" id="books" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <div>
+            <h2 class="section-title">My Textbooks Library</h2>
+            <p class="section-subtitle" style="margin-bottom: 0;">Select a book to generate or review AI Notes, Flashcards, and Quizzes.</p>
+          </div>
+          <button class="btn btn-primary" onclick="switchSection('upload')">➕ Upload New</button>
+        </div>
+
+        <div class="books-grid" id="booksGridContainer">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </section>
+
+      <!-- SECTION 4: NOTES -->
+      <section class="dashboard-section" id="notes" style="display: none;">
+        <div id="notesViewArea">
+          <div style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📝</div>
+            <h3>No Notes Selected</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Go to "My Books" and click "Generate Notes" on any textbook to view AI summary notes.</p>
+            <button class="btn btn-primary" onclick="switchSection('books')">📚 Go to My Books</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: FLASHCARDS -->
+      <section class="dashboard-section" id="flashcards" style="display: none;">
+        <div id="flashcardsViewArea">
+          <div style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🃏</div>
+            <h3>No Flashcards Selected</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Go to "My Books" and click "Flashcards" on any textbook to study with interactive 3D cards.</p>
+            <button class="btn btn-primary" onclick="switchSection('books')">📚 Go to My Books</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: QUIZ -->
+      <section class="dashboard-section" id="quiz" style="display: none;">
+        <div id="quizViewArea">
+          <div style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+            <h3>No Quiz Selected</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Go to "My Books" and click "Make Quiz" to generate a 10-question MCQ practice exam.</p>
+            <button class="btn btn-primary" onclick="switchSection('books')">📚 Go to My Books</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/upload.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

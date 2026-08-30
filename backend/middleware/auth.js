@@ -1,0 +1,20 @@
+import jwt from 'jsonwebtoken';
+
+export function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'Access token required' });
+  }
+
+  const secret = process.env.JWT_SECRET || 'scholarmate_secret_key_2026_aanm_vvrsr';
+
+  jwt.verify(token, secret, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+    req.user = user; // user contains { id, email, username }
+    next();
+  });
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScholarMate - AI Learning Platform</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    .auth-hero-container {
+      display: flex;
+      min-height: calc(100vh - 65px);
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+      padding: 3rem 2rem;
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .hero-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-highlight {
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 2rem;
+    }
+
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all var(--transition-fast);
+    }
+
+    .auth-tab.active {
+      color: var(--brand-primary);
+      border-bottom-color: var(--brand-primary);
+    }
+
+    .feature-badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .feature-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-input);
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .auth-hero-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-title { font-size: 2.4rem; }
+      .feature-badge-list { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Startup Screen Animation Overlay -->
+  <div class="startup-screen" id="startupScreen">
+    <div class="particles-container">
+      <div class="particle" style="left: 15%; animation-duration: 5s;"></div>
+      <div class="particle" style="left: 35%; animation-duration: 3.5s;"></div>
+      <div class="particle" style="left: 55%; animation-duration: 4.2s;"></div>
+      <div class="particle" style="left: 75%; animation-duration: 6s;"></div>
+      <div class="particle" style="left: 88%; animation-duration: 3.8s;"></div>
+    </div>
+
+    <div class="startup-logo-wrapper">
+      <div class="startup-glow-ring"></div>
+      <img src="assets/logo.svg" alt="ScholarMate Logo">
+    </div>
+
+    <h1 class="startup-title">ScholarMate</h1>
+    <div class="startup-subtitle">Study Smarter with AI...</div>
+  </div>
+
+  <!-- Navbar Header -->
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/logo.svg" alt="ScholarMate">
+      <span>ScholarMate</span>
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a href="team.html" class="btn btn-secondary btn-sm">👥 Team Page</a>
+      <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+        <span id="themeIcon">☀️</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero & Auth Section -->
+  <div class="container">
+    <div class="auth-hero-container">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Transform Textbooks into <span class="hero-highlight">AI Notes, Cards & Quizzes</span>
+        </h1>
+        <p class="hero-desc">
+          ScholarMate automatically extracts text from your PDF textbooks and document photos using OCR, then harnesses Google Gemini AI to instantly craft comprehensive summary notes, 3D flashcards, and MCQ exams.
+        </p>
+
+        <div class="feature-badge-list">
+          <div class="feature-badge-item">📄 PDF Parsing</div>
+          <div class="feature-badge-item">🖼️ OCR Text Extraction</div>
+          <div class="feature-badge-item">✨ Gemini 2.5 Flash</div>
+          <div class="feature-badge-item">🃏 3D Flip Flashcards</div>
+          <div class="feature-badge-item">📋 Interactive Quizzes</div>
+        </div>
+      </div>
+
+      <!-- Auth Form Card -->
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="loginTab">Sign In</div>
+          <div class="auth-tab" id="signupTab">Create Account</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" class="form-control" placeholder="student@college.edu" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In to ScholarMate</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="signupUsername">Full Name / Username</label>
+            <input type="text" id="signupUsername" class="form-control" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Email Address</label>
+            <input type="email" id="signupEmail" class="form-control" placeholder="student@college.edu" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" class="form-control" placeholder="Min. 6 characters" minlength="6" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Free Account</button>
+        </form>
+
+        <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
+          🎓 AANM & VVRSR Polytechnic College Final Year Project
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
