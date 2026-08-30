@@ -9,16 +9,30 @@ export async function extractFromPDF(filePath) {
     const text = pdfData.text ? pdfData.text.trim() : '';
     const numPages = pdfData.numpages || 1;
 
-    // If PDF text is extremely short, it might be scanned image PDF.
-    if (text.length < 50) {
+    // If PDF text layer contains text, return it
+    if (text.length >= 50) {
       return {
-        text: text || "PDF contains minimal text or scanned pages without embedded text layers.",
+        text,
         pageCount: numPages
       };
     }
 
+    // If text layer is missing or scanned image PDF, attempt OCR fallback
+    console.log("Scanned or image-based PDF detected. Running OCR fallback...");
+    try {
+      const ocrResult = await extractFromImage(filePath);
+      if (ocrResult.text && ocrResult.text.length > 30) {
+        return {
+          text: ocrResult.text,
+          pageCount: numPages
+        };
+      }
+    } catch (ocrErr) {
+      console.warn("OCR fallback on PDF failed:", ocrErr.message);
+    }
+
     return {
-      text,
+      text: text || "Textbook document contains scanned pages without selectable text layers.",
       pageCount: numPages
     };
   } catch (error) {
