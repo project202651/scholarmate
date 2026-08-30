@@ -25,7 +25,7 @@ async function uploadFile(file) {
 
     if (progressBarFill) progressBarFill.style.width = '80%';
 
-    const data = await response.json();
+    const data = await safeFetchJson(response);
 
     if (!response.ok) {
       throw new Error(data.error || 'File upload failed');

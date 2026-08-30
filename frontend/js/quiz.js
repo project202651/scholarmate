@@ -28,7 +28,7 @@ async function handleGenerateQuiz(bookId, bookTitle) {
       headers: getAuthHeaders()
     });
 
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate quiz');
 
     quizData = data.quiz;
@@ -147,7 +147,7 @@ async function submitQuiz() {
       body: JSON.stringify({ answers: userAnswers })
     });
 
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     if (!res.ok) throw new Error(data.error || 'Quiz submission failed');
 
     renderQuizResults(data);

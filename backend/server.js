@@ -54,6 +54,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// 404 handler for missing API endpoints
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ error: `API endpoint ${req.originalUrl} not found` });
+});
+
 // Fallback to frontend index for unhandled GET routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(frontendDir, 'index.html'));

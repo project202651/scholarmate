@@ -1,4 +1,11 @@
-// Auth handling: Signup, Login, Startup Animation & Toast Notifications
+async function safeFetchJson(response) {
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    return { error: text || `Server returned error (${response.status})` };
+  }
+}
 
 function showToast(message, type = 'info') {
   let container = document.getElementById('toastContainer');
@@ -80,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify({ email, password })
         });
 
-        const data = await response.json();
+        const data = await safeFetchJson(response);
 
         if (!response.ok) {
           throw new Error(data.error || 'Login failed');
@@ -119,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify({ username, email, password })
         });
 
-        const data = await response.json();
+        const data = await safeFetchJson(response);
 
         if (!response.ok) {
           throw new Error(data.error || 'Signup failed');

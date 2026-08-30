@@ -16,7 +16,7 @@ async function loadUserBooks() {
     const res = await fetch('/api/books', { headers: getAuthHeaders() });
     if (!res.ok) throw new Error('Failed to fetch books');
 
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     const books = data.books || [];
 
     if (books.length === 0) {
@@ -92,7 +92,7 @@ async function handleGenerateNotes(bookId, bookTitle) {
       headers: getAuthHeaders()
     });
 
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate notes');
 
     activeNotesData = { ...data.notes, bookTitle };
@@ -197,7 +197,7 @@ async function deleteBook(bookId) {
       headers: getAuthHeaders()
     });
 
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     if (!res.ok) throw new Error(data.error || 'Failed to delete book');
 
     showToast('Book deleted successfully', 'success');

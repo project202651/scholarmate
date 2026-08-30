@@ -26,7 +26,7 @@ async function handleGenerateFlashcards(bookId, bookTitle) {
       headers: getAuthHeaders()
     });
 
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate flashcards');
 
     flashcardsData = data.flashcards ? data.flashcards.cards : [];

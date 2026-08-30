@@ -57,11 +57,20 @@ function switchSection(sectionId) {
   }
 }
 
+async function safeFetchJson(response) {
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    return { error: text || `Server error (${response.status})` };
+  }
+}
+
 async function loadDashboardStats() {
   try {
     const res = await fetch('/api/dashboard/stats', { headers: getAuthHeaders() });
     if (!res.ok) return;
-    const data = await res.json();
+    const data = await safeFetchJson(res);
     const { stats } = data;
 
     const elBooks = document.getElementById('statBooksCount');
